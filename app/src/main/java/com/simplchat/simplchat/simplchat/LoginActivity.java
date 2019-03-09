@@ -1,5 +1,6 @@
 package com.simplchat.simplchat.simplchat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
@@ -145,9 +146,10 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"No Password or Email",Toast.LENGTH_LONG);
         } else {
             Toast.makeText(getApplicationContext(),"Logged in",Toast.LENGTH_LONG).show();
-            SharedPreferences settings = getApplicationContext().getSharedPreferences("sessid",0);
+            SharedPreferences settings = getApplicationContext().getSharedPreferences("alles", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("sessid",content.toString());
+            editor.apply();
             Intent starter = new Intent(this,MainActivity.class);
             startActivity(starter);
         }
