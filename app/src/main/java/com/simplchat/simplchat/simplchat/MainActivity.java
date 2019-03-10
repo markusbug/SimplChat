@@ -1,6 +1,7 @@
 package com.simplchat.simplchat.simplchat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,20 +22,21 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences settings;
     private TextView main;
-    private String sessid;
+    private String email,pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         settings = getApplicationContext().getSharedPreferences("alles", Context.MODE_PRIVATE);
-        sessid = settings.getString("sessid","");
         this.main = (TextView) findViewById(R.id.textMessage);
-
+        email = settings.getString("email","");
+        pass = settings.getString("pass","");
     }
     private String getChats() throws IOException {
         URL url = null;
+        String sessid = APIWorker.getSession(this.email,this.pass);
         try {
-            url = new URL("https://simplchat.info/appfunk/getChats.php?sessid="+this.sessid);
+            url = new URL("https://simplchat.info/appfunk/getChats.php?sessid="+sessid);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -98,5 +100,9 @@ public class MainActivity extends AppCompatActivity {
             this.main.setText(text);
         }
 
+    }
+    public void newChat(View v){
+        Intent in = new Intent(this, ChatActivity.class);
+        startActivity(in);
     }
 }

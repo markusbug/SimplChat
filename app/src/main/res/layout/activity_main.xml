@@ -8,16 +8,32 @@
 
     <ImageButton
         android:id="@+id/imagebutton"
-        android:layout_width="59dp"
-        android:layout_height="59dp"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="277dp"
         android:layout_marginBottom="83dp"
         android:background="@null"
         android:onClick="displayChat"
         android:src="@drawable/icon_reload_"
         app:layout_constraintBottom_toTopOf="@+id/textMessage"
+        app:layout_constraintEnd_toStartOf="@+id/newmessage"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageButton>
+
+    <ImageButton
+        android:id="@+id/newmessage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="83dp"
+        android:background="@null"
+        android:onClick="newChat"
+        android:src="@drawable/newmess"
+        app:layout_constraintBottom_toTopOf="@+id/textMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imagebutton"
         app:layout_constraintTop_toTopOf="parent"></ImageButton>
 
     <TextView
@@ -27,10 +43,10 @@
         android:layout_marginStart="14dp"
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="283dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagebutton"
-        android:scrollbars = "vertical"/>
+        app:layout_constraintTop_toBottomOf="@+id/imagebutton" />
 
 </android.support.constraint.ConstraintLayout>

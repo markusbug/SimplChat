@@ -149,6 +149,8 @@ public class LoginActivity extends AppCompatActivity {
             SharedPreferences settings = getApplicationContext().getSharedPreferences("alles", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("sessid",content.toString());
+            editor.putString("email",this.emailET.getText().toString());
+            editor.putString("pass",this.passET.getText().toString());
             editor.apply();
             Intent starter = new Intent(this,MainActivity.class);
             startActivity(starter);
