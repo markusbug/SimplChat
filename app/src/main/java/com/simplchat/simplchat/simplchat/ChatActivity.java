@@ -29,7 +29,6 @@ public class ChatActivity extends AppCompatActivity {
         messageET = (EditText) findViewById(R.id.message);
         settings = getApplicationContext().getSharedPreferences("alles", Context.MODE_PRIVATE);
         sessid = settings.getString("sessid","");
-        Toast.makeText(getApplicationContext(), sessid, Toast.LENGTH_LONG).show();
     }
     public void sendMessage(View v){
         if(!toET.getText().toString().equals("")){
@@ -80,6 +79,12 @@ public class ChatActivity extends AppCompatActivity {
             content.append(inputLine);
         }
         in.close();
-        Toast.makeText(getApplicationContext(),"Sended Successfully!",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),content.toString(),Toast.LENGTH_LONG).show();
+        if(content.toString().equals("sent")){
+            Toast.makeText(getApplicationContext(),"Sended Successfully!",Toast.LENGTH_SHORT).show();
+        } else if(content.toString().equals("nouser")){
+            Toast.makeText(getApplicationContext(),"Could not send Message",Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
