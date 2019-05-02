@@ -7,10 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private String getChats() throws IOException {
         URL url = null;
         String sessid = APIWorker.getSession(this.email,this.pass);
+        System.out.println(sessid);
         try {
             url = new URL("https://simplchat.info/appfunk/getChats.php?sessid="+sessid);
         } catch (MalformedURLException e) {
@@ -94,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             }
             System.out.println(chat[0][0]);
             String text = "";
+            System.out.println(chat[0][0]);
             for(int a = 0;a<chats.length;a++){
                 text += "Von: "+chat[a][0]+".\nNachricht: "+chat[a][1]+"\n";
             }

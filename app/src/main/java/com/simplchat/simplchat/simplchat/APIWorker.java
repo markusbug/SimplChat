@@ -30,7 +30,7 @@ public class APIWorker {
         int status = 0;
         try {
             status = con.getResponseCode();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         BufferedReader in;

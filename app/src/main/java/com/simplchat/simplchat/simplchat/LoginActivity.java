@@ -14,19 +14,12 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.PasswordAuthentication;
 import java.net.ProtocolException;
-import java.net.Proxy;
 import java.net.URL;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.net.URLConnection.*;
 
-import static android.provider.Telephony.Carriers.PASSWORD;
 
 public class LoginActivity extends AppCompatActivity {
     Button login, regi;
@@ -152,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("email",this.emailET.getText().toString());
             editor.putString("pass",this.passET.getText().toString());
             editor.apply();
+            System.out.println(content.toString());
             Intent starter = new Intent(this,MainActivity.class);
             startActivity(starter);
         }
