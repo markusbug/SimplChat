@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
             content.append(inputLine);
         }
         in.close();
-        return content.toString();
+        String textan = content.toString();
+        return textan;
 
     }
     public void displayChat(View v){
