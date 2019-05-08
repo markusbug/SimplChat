@@ -14,11 +14,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences settings;
     private TextView main;
     private String email,pass;
+    private Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,31 @@ public class MainActivity extends AppCompatActivity {
         email = settings.getString("email","");
         pass = settings.getString("pass","");
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.timer = new Timer();
+        this.timer.schedule(new Refresher(), 0, 1000);
+    }
+
+    @Override
+    protected void onDestroy() {
+        timer.cancel();
+        super.onDestroy();
+    }
+
+    /**
+     * Aktualisiert die Chatansicht jede Sekunde.
+     */
+    private class Refresher extends TimerTask   {
+
+        @Override
+        public void run() {
+            displayChat(null);
+        }
+    }
+
     private String getChats() throws IOException {
         URL url = null;
         String sessid = APIWorker.getSession(this.email,this.pass);
@@ -71,32 +99,32 @@ public class MainActivity extends AppCompatActivity {
         String out = "";
         try {
             out = getChats();
+            //System.out.println(out);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(out);
+        //System.out.println(out);
         if(out.equals("nonew")){
-            this.main.setText("No new messages.");
         } else if(out.equals("sessidinvalid")){
             this.main.setText("You need to relogin, session expired.");
         }
         else {
             String[] chats = out.split(".\\|.");
             String[] zwischen;
-            System.out.println(chats.length);
+            //System.out.println(chats.length);
             String[][] chat = new String[chats.length][2];
             for(int i = 0;i<chats.length;i++){
                 zwischen = chats[i].split(".;.");
                 chat[i][0] = zwischen[0];
                 chat[i][1] = zwischen[1];
             }
-            System.out.println(chat[0][0]);
+            //System.out.println(chat[0][0]);
             String text = "";
-            System.out.println(chat[0][0]);
+            //System.out.println(chat[0][0]);
             for(int a = 0;a<chats.length;a++){
                 text += "Von: "+chat[a][0]+".\nNachricht: "+chat[a][1]+"\n";
             }
-            this.main.setText(text);
+            this.main.setText(this.main.getText() + text);
         }
 
     }
