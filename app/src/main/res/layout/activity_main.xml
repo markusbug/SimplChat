@@ -36,5 +36,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="60dp" />
 
+    <TableLayout
+        android:id="@+id/chatrows"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textMessage"
+        app:layout_constraintStart_toEndOf="@+id/textMessage"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </TableLayout>
+
 
 </android.support.constraint.ConstraintLayout>

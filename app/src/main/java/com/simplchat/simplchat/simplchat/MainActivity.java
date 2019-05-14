@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         //System.out.println(out);
-        if(out.equals("nonew")){
+        if(out.equals("nonew")) {
         } else if(out.equals("sessidinvalid")){
             this.main.setText("You need to relogin, session expired.");
         }
