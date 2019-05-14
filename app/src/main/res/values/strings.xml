@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SimplChat</string>
+    <string name="text">some text</string>
 </resources>
