@@ -35,10 +35,6 @@ public class MainActivity extends AppCompatActivity {
         this.main = (TextView) findViewById(R.id.textMessage);
         email = settings.getString("email","");
         pass = settings.getString("pass","");
-        ConstraintLayout layout = findViewById(R.id.layout);
-        TextView text = new TextView(this);
-        text.setText("Hallo lutscten wwfwg");
-        layout.addView(text);
     }
 
     /**
