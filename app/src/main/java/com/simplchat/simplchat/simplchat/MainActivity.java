@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences settings;
     private TextView main;
     private String email,pass;
+    private TableLayout tableLayout;
     private Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         settings = getApplicationContext().getSharedPreferences("alles", Context.MODE_PRIVATE);
         this.main = (TextView) findViewById(R.id.textMessage);
+        this.tableLayout = findViewById(R.id.chatrows);
         email = settings.getString("email","");
         pass = settings.getString("pass","");
     }
@@ -132,7 +136,14 @@ public class MainActivity extends AppCompatActivity {
             for(int a = 0;a<chats.length;a++){
                 text += "Von: "+chat[a][0]+".\nNachricht: "+chat[a][1]+"\n";
             }
-            this.main.setText(this.main.getText() + text);
+            TableRow r = new TableRow(this);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            r.setLayoutParams(lp);
+            TextView view = new TextView(this);
+            view.setText(this.main.getText() + text);
+            r.addView(view);
+            this.tableLayout.addView(r);
+            //this.main.setText(this.main.getText() + text);
         }
 
     }
