@@ -3,6 +3,7 @@ package com.simplchat.simplchat.simplchat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences settings;
     private TextView main;
     private String email,pass;
-    //private TableLayout tableLayout;
     private Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +33,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         settings = getApplicationContext().getSharedPreferences("alles", Context.MODE_PRIVATE);
         this.main = (TextView) findViewById(R.id.textMessage);
-       // this.tableLayout = findViewById(R.id.chatrows);
         email = settings.getString("email","");
         pass = settings.getString("pass","");
+        ConstraintLayout layout = findViewById(R.id.layout);
+        TextView text = new TextView(this);
+        text.setText("Hallo lutscten wwfwg");
+        layout.addView(text);
     }
 
     /**
@@ -136,19 +139,6 @@ public class MainActivity extends AppCompatActivity {
             for(int a = 0;a<chats.length;a++){
                 text += "Von: "+chat[a][0]+".\nNachricht: "+chat[a][1]+"\n";
             }
-            /**
-            TableRow r = new TableRow(this);
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-            r.setLayoutParams(lp);
-                TextView view = new TextView(this);
-                view.setText(this.main.getText() + text);
-                r.addView(view);
-                this.tableLayout.addView(r);
-                //this.main.setText(this.main.getText() + text);}
-            }catch(Exception e) {
-                System.err.println(e.getMessage());
-            }
-             */
             this.main.setText(this.main.getText() + text);
         }
 
