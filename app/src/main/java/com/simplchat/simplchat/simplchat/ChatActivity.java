@@ -1,14 +1,13 @@
 package com.simplchat.simplchat.simplchat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,6 +20,7 @@ public class ChatActivity extends AppCompatActivity {
     private EditText toET, messageET;
     private SharedPreferences settings;
     private String sessid;
+    private String newQRCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,17 @@ public class ChatActivity extends AppCompatActivity {
         messageET = (EditText) findViewById(R.id.message);
         settings = getApplicationContext().getSharedPreferences("alles", Context.MODE_PRIVATE);
         sessid = settings.getString("sessid","");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            this.newQRCode = extras.getString("qrcode");
+            //The key argument here must match that used in the other activity
+        }
+        if(this.newQRCode == null){
+            //Nix
+        } else{
+            addContact(this.newQRCode);
+            this.toET.setText(this.newQRCode);
+        }
     }
     public void sendMessage(View v){
         if(!toET.getText().toString().equals("")){
@@ -85,6 +96,13 @@ public class ChatActivity extends AppCompatActivity {
         } else if(content.toString().equals("nouser")){
             Toast.makeText(getApplicationContext(),"Could not send Message",Toast.LENGTH_SHORT).show();
         }
+
+    }
+    public void startQR(View v){
+        Intent in = new Intent(this, DecoderActivity.class);
+        startActivity(in);
+    }
+    public void addContact(String name){
 
     }
 }

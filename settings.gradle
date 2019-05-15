@@ -1,1 +1,4 @@
-include ':app'
+include ':app', ':barcode-reader2', ':qrcodereaderview', ':samples'
+project(':barcode-reader2').projectDir = new File('Barcode-Reader/barcode-reader')
+project(':qrcodereaderview').projectDir = new File('QRCodeReaderView-master/qrcodereaderview')
+project(':samples').projectDir = new File('QRCodeReaderView-master/samples')
