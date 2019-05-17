@@ -22,23 +22,6 @@ public class DecoderActivity extends Activity implements QRCodeReaderView.OnQRCo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decoder);
-        //Permissions
-        int MY_PERMISSIONS_REQUEST_CAMERA=0;
-        // Here, this is the current activity
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-        {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA))
-            {
-
-            }
-            else
-            {
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA );
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
 
 
         qrCodeReaderView = (QRCodeReaderView) findViewById(R.id.qrdecoderview);
