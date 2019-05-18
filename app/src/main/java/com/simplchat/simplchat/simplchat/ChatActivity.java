@@ -189,4 +189,10 @@ public class ChatActivity extends AppCompatActivity {
     public void changeToText(String text) {
         this.toET.setText(text);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent in = new Intent(this, MainActivity.class);
+        startActivity(in);
+    }
 }
