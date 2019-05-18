@@ -14,12 +14,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -29,7 +32,6 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences settings;
-    private TextView main;
     private String email,pass;
     private Timer timer;
     @Override
@@ -37,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         settings = getApplicationContext().getSharedPreferences("alles", Context.MODE_PRIVATE);
-        this.main = findViewById(R.id.textMessage);
         email = settings.getString("email","");
         pass = settings.getString("pass","");
         int MY_PERMISSIONS_REQUEST_CAMERA=0;
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 // result of the request.
             }
         }
-        File new_file = new File("contacts.txt");
+        Context context = getApplicationContext();
+        File new_file = new File(context.getFilesDir().getPath() + "/chats.txt");
         try {
             new_file.createNewFile();
         } catch (IOException e) {
@@ -64,6 +66,25 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d("Create File", "File exists?" + new_file.exists());
+        LinearLayout myLayout = findViewById(R.id.linearLayout);
+        String[] howmuch = null;
+        try {
+            howmuch = ChatActivity.getStringFromFile(context.getFilesDir().getPath() + "/chats.txt").split("QQQQ");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //System.out.println(howmuch[0]);
+        if ((howmuch != null) && (!howmuch[0].equals(""))) {
+            for (int i = 0; i < howmuch.length - 1; i++) {
+                System.out.println("Button made");
+                System.out.println(howmuch[i]);
+                Button newButton = new Button(this);
+                newButton.setText(howmuch[i]);
+                myLayout.addView(newButton);
+            }
+        } else {
+            System.out.println("It is null");
+        }
     }
 
     @Override
@@ -158,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         //System.out.println(out);
         if(out.equals("nonew")) {
         } else if(out.equals("sessidinvalid")){
-            this.main.setText("You need to relogin, session expired.");
+            Toast.makeText(this, "You need to relogin, session expired.", Toast.LENGTH_LONG).show();
         }
         else {
             String[] chats = out.split(".\\|.");
@@ -174,9 +195,16 @@ public class MainActivity extends AppCompatActivity {
             String text = "";
             //System.out.println(chat[0][0]);
             for(int a = 0;a<chats.length;a++){
-                text += "Von: "+chat[a][0]+".\nNachricht: "+chat[a][1]+"\n";
+                text += "Von: " + chat[a][0] + ".\nNachricht: " + chat[a][1] + "QQQQ";
             }
-            this.main.setText(this.main.getText() + text);
+            Context context = getApplicationContext();
+            try {
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("chats.txt", Context.MODE_APPEND));
+                outputStreamWriter.write(text);
+                outputStreamWriter.close();
+            } catch (IOException e) {
+                Log.e("Exception", "File write failed: " + e.toString());
+            }
         }
 
     }
