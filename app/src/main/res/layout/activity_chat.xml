@@ -37,25 +37,39 @@
 
     <ImageButton
         android:id="@+id/newmessage"
-        android:layout_width="62dp"
+        android:layout_width="64dp"
         android:layout_height="52dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
         android:background="@null"
         android:onClick="sendMessage"
         android:src="@drawable/send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/message"></ImageButton>
+        app:layout_constraintStart_toEndOf="@+id/message"
+        app:layout_constraintTop_toBottomOf="@+id/contactsView"></ImageButton>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="331dp"
-        android:layout_marginEnd="145dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="8dp"
         android:onClick="startQR"
         android:text="QR Code"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/to" />
+
+    <LinearLayout
+        android:id="@+id/contactsView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/newmessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 </android.support.constraint.ConstraintLayout>

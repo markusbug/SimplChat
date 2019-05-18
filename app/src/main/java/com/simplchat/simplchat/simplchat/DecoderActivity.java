@@ -1,15 +1,10 @@
 package com.simplchat.simplchat.simplchat;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 
@@ -24,7 +19,7 @@ public class DecoderActivity extends Activity implements QRCodeReaderView.OnQRCo
         setContentView(R.layout.activity_decoder);
 
 
-        qrCodeReaderView = (QRCodeReaderView) findViewById(R.id.qrdecoderview);
+        qrCodeReaderView = findViewById(R.id.qrdecoderview);
         qrCodeReaderView.setOnQRCodeReadListener(this);
 
         // Use this function to enable/disable decoding
@@ -47,6 +42,7 @@ public class DecoderActivity extends Activity implements QRCodeReaderView.OnQRCo
         Intent in = new Intent(this, ChatActivity.class);
         in.putExtra("qrcode",text);
         startActivity(in);
+
     }
 
     @Override
